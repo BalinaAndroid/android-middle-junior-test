@@ -2,12 +2,12 @@
 Добро пожаловать! Цель задания- оценить Ваши навыки работы, чистоту кода и подход к решению задач
 
 ## Технологический стек и вводные
-**Основное: ** Kotlin/Android
-**Дополнительно: ** Compose/View, Ktor/Retrofit, MapKit/MapsSDK
-Дизайн на ваше усмотрение с использованием элементов из `Material Design`
-Запросы представлены в `postman` коллекции
-Основной адрес `https://uotest.duckdns.org` 
-Адрес сокета `wss://uotest.duckdns.org`
+* Основное: Kotlin/Android
+* Дополнительно: Compose/View, Ktor/Retrofit, MapKit/MapsSDK
+* Дизайн на ваше усмотрение с использованием элементов из `Material Design`
+* Запросы представлены в `postman` коллекции
+* Основной адрес `https://uotest.duckdns.org` 
+* Адрес сокета `wss://uotest.duckdns.org`
   
 ## Суть задания
 
