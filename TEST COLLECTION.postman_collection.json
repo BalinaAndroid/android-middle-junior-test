@@ -1,0 +1,741 @@
+{
+  "info": {
+    "_postman_id": "4ad49c44-4b67-496a-800c-e417ee898768",
+    "name": "TEST COLLECTION",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "15786791"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "CHECK LOGIN",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}auth/login/check?login=fdfd",
+              "host": [
+                "{{url}}auth"
+              ],
+              "path": [
+                "login",
+                "check"
+              ],
+              "query": [
+                {
+                  "key": "login",
+                  "value": "fdfd"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "REGISTER",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let r = pm.response.json();\r\npm.environment.set(\"access_token\", r.data.access_token);\r\npm.environment.set(\"refresh_token\", r.data.refresh_token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"login\": \"login\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}auth/register",
+              "host": [
+                "{{url}}auth"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "LOGIN",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let r = pm.response.json();\r\npm.environment.set(\"access_token\", r.data.access_token);\r\npm.environment.set(\"refresh_token\", r.data.refresh_token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"login\": \"login\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}auth/login",
+              "host": [
+                "{{url}}auth"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PROTECTED",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}auth/protected",
+              "host": [
+                "{{url}}auth"
+              ],
+              "path": [
+                "protected"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "REFRESH TOKEN",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let r = pm.response.json();\r\npm.environment.set(\"access_token\", r.data.access_token);\r\npm.environment.set(\"refresh_token\", r.data.refresh_token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}auth/refresh",
+              "host": [
+                "{{url}}auth"
+              ],
+              "path": [
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "WELL KNOWN JWKS",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}.well-known/jwks.json",
+              "host": [
+                "{{url}}",
+                "well-known"
+              ],
+              "path": [
+                "jwks.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "WELL KNOWN CONFIG",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}.well-known/openid-configuration",
+              "host": [
+                "{{url}}",
+                "well-known"
+              ],
+              "path": [
+                "openid-configuration"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "file",
+      "item": [
+        {
+          "name": "UPLOAD FILE",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": [
+                    "/C:/Users/gizce/Downloads/1b89a6b43bf851e6ccc216a2cbf30bdf.png"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{url}}file/upload",
+              "host": [
+                "{{url}}file"
+              ],
+              "path": [
+                "upload"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET FILE",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}file/01a19273fc677150a56c4ecb90773032",
+              "host": [
+                "{{url}}file"
+              ],
+              "path": [
+                "01a19273fc677150a56c4ecb90773032"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET FILE INFO",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}file/info/01a18e4eca4e7c598e64507e32e465c9",
+              "host": [
+                "{{url}}file"
+              ],
+              "path": [
+                "info",
+                "01a18e4eca4e7c598e64507e32e465c9"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "point",
+      "item": [
+        {
+          "name": "GET POINT LIST",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}point/list?page=0&creator_id=01a188edea6f7a69b21da8af695cdb4f&name=name&min_lat=0.0&max_lat=0.0&min_lng=0.0&max_lng=0.0&sort=NEW",
+              "host": [
+                "{{url}}point"
+              ],
+              "path": [
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "creator_id",
+                  "value": "01a188edea6f7a69b21da8af695cdb4f"
+                },
+                {
+                  "key": "name",
+                  "value": "name"
+                },
+                {
+                  "key": "min_lat",
+                  "value": "0.0"
+                },
+                {
+                  "key": "max_lat",
+                  "value": "0.0"
+                },
+                {
+                  "key": "min_lng",
+                  "value": "0.0"
+                },
+                {
+                  "key": "max_lng",
+                  "value": "0.0"
+                },
+                {
+                  "key": "from",
+                  "value": "2026-10-31T07:59:04",
+                  "disabled": true
+                },
+                {
+                  "key": "to",
+                  "value": "2026-10-31T07:59:06",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "NEW"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CREATE POINT",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"NAME\",\r\n    \"description\": \"DESCRIPTION\",\r\n    \"lat\": 0.0,\r\n    \"lng\": 0.0,\r\n    \"photos\": [\r\n        {\r\n            \"big_id\": \"01a190f80b2f7f02bd63c7da3a8435ad\",\r\n            \"small_id\": \"01a190f80b2f7f02bd63c7da3a8435ad\"\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}point/create",
+              "host": [
+                "{{url}}point"
+              ],
+              "path": [
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CREATE POINT",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"NAME2\",\r\n    \"description\": \"DESCRIPTION\",\r\n    \"lat\": 0.0,\r\n    \"lng\": 0.0,\r\n    \"photos\": [\r\n        {\r\n            \"big_id\": \"01a190f80b2f7f02bd63c7da3a8435ad\",\r\n            \"small_id\": \"01a190f80b2f7f02bd63c7da3a8435ad\"\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}point/update/01a190f82a887fdca85e58b9467137ae",
+              "host": [
+                "{{url}}point"
+              ],
+              "path": [
+                "update",
+                "01a190f82a887fdca85e58b9467137ae"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE POINT",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}point/delete/01a190f82a887fdca85e58b9467137ae",
+              "host": [
+                "{{url}}point"
+              ],
+              "path": [
+                "delete",
+                "01a190f82a887fdca85e58b9467137ae"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "GET USER MY",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}user/my",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET USER",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}user/01a188edea6f7a69b21da8af695cdb4f",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "01a188edea6f7a69b21da8af695cdb4f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UPDATE MY USER",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"first_name\": \"first\",\r\n    \"last_name\": \"last\",\r\n    \"photos\": [\r\n        {\r\n            \"big_id\": \"01a190f80b2f7f02bd63c7da3a8435ad\",\r\n            \"small_id\": \"01a190f80b2f7f02bd63c7da3a8435ad\"\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}user/update",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "comment",
+      "item": [
+        {
+          "name": "GET COMMENT LIST",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}comment/list?page=0&relation_id=01a191048df07626b8b2181fb935930c",
+              "host": [
+                "{{url}}comment"
+              ],
+              "path": [
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "relation_id",
+                  "value": "01a191048df07626b8b2181fb935930c"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CRETE COMMENT",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"relation_id\": \"01a19268d0b174218b6b02e0dd58077c\",\r\n    \"message\": {\r\n        \"type\": \"text\",\r\n        \"text\": \"message\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}comment/create",
+              "host": [
+                "{{url}}comment"
+              ],
+              "path": [
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UPDATE COMMENT",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"relation_id\": \"01a191048df07626b8b2181fb935930c\",\r\n    \"message\": {\r\n        \"type\": \"text\",\r\n        \"text\": \"message2\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}comment/update/01a191e7a05975b4b142a5ca0348e1d1",
+              "host": [
+                "{{url}}comment"
+              ],
+              "path": [
+                "update",
+                "01a191e7a05975b4b142a5ca0348e1d1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE COMMENT",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}comment/delete/01a191e7a05975b4b142a5ca0348e1d1",
+              "host": [
+                "{{url}}comment"
+              ],
+              "path": [
+                "delete",
+                "01a191e7a05975b4b142a5ca0348e1d1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "{{release_url}}"
+    },
+    {
+      "key": "test_url",
+      "value": "http://localhost:8088/"
+    },
+    {
+      "key": "release_url",
+      "value": "https://uotest.duckdns.org/"
+    }
+  ]
+}
